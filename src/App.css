@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 8px; /* Space between label and input */
+}
+
+.square {
+  width: max-content;
+  height: max-content;
+  background-color: blue;
+  margin: 20px;
+}
