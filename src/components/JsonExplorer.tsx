@@ -20,16 +20,16 @@ const findValue = (obj: any, key: string): string | boolean => {
       if (Array.isArray(current)) {
           const index = parseInt(k, 10);
           if (isNaN(index) || index < 0 || index >= current.length) {
-              return "undefined"; // Campo não existe
+              return "undefined"; 
           }
           current = current[index];
       } else if (current && typeof current === 'object' && k in current) {
           current = current[k];
       } else {
-          return "undefined"; // Campo não existe
+          return "undefined"; 
       }
   }
-  return current; // Retorna o valor
+  return current; 
 
 };
 
