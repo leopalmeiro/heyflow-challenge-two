@@ -9,7 +9,6 @@ export type Field = {
     prop: string;
     value: string;
     hasError: boolean;
-    fields?: Field;
 };
 
 export const data: Data = {

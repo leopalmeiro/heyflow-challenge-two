@@ -113,10 +113,11 @@ const JsonExplorer: React.FC<Props> = ({ res }) => {
     <div className="container">
       <h1 className="headline">Hey Flow Challenge 02</h1>
       <div className="input-wrapper">
-        <label htmlFor="property">property</label>
+        <label htmlFor="property">Property</label>
         <input type="text" value={selectedKey} id="property" onChange={handleChange} />
         <span>{String(selectedValue)}</span>
       </div>
+      <label>Response</label>
       <pre className="response">{renderJson(res)}</pre>
     </div>
   );
