@@ -7,12 +7,45 @@ type Props = {
   res: Data;
 };
 
+
+// Function to find value by key
+const findValue = (obj: any, key: string): string | boolean => {
+
+  key = key.replace(/\[(\d+)\]/g, '.$1').replace(/\s+/g, '');
+
+  const keys = key.split('.');
+  let current = obj;
+
+  for (const k of keys) {
+      if (Array.isArray(current)) {
+          const index = parseInt(k, 10);
+          if (isNaN(index) || index < 0 || index >= current.length) {
+              return "undefined"; // Campo não existe
+          }
+          current = current[index];
+      } else if (current && typeof current === 'object' && k in current) {
+          current = current[k];
+      } else {
+          return "undefined"; // Campo não existe
+      }
+  }
+  return current; // Retorna o valor
+
+};
+
 const JsonExplorer: React.FC<Props> = ({ res }) => {
   const [selectedKey, setSelectedKey] = useState("");
   const [selectedValue, setSelectedValue] = useState<string | boolean>(
     "undefined"
   );
 
+  const handleChange = (event:any) => {
+    const value = event.target.value
+    setSelectedKey(event.target.value);
+    const modifiedString = value.replace("res.", "");
+    const test = findValue(res,modifiedString );
+    setSelectedValue(test)
+  };
   const INDENT = 10;
 
   const handleKeyClick = (
@@ -81,7 +114,7 @@ const JsonExplorer: React.FC<Props> = ({ res }) => {
       <h1 className="headline">Hey Flow Challenge 02</h1>
       <div className="input-wrapper">
         <label htmlFor="property">property</label>
-        <input type="text" value={selectedKey} id="property" name="property"/>
+        <input type="text" value={selectedKey} id="property" onChange={handleChange} />
         <span>{String(selectedValue)}</span>
       </div>
       <pre className="response">{renderJson(res)}</pre>
